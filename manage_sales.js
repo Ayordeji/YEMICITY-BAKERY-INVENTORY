@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const breadTypes = [
-    { name: "#300 Bread", price: 300 },
-    { name: "#400 Bread", price: 400 },
-    { name: "#500 Bread", price: 500 },
+    { name: "#270 Bread", price: 270 },
+    { name: "#350 Bread", price: 350 },
+    { name: "#450 Bread", price: 450 },
     { name: "#600 Bread", price: 600 },
     { name: "#1000 Bread", price: 1000 },
     { name: "#1200 Bread", price: 1200 },
