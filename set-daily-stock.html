@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <nav>
-      <a href="index.html" class="nav-button">Home</a>
-      <span id="current-date"></span>
-      <a href="manage-sales.html" class="nav-button">Manage Sales</a>
+    <nav class="button-container">
+      <a href="index.html" class="cta-button primary">Home</a>
+      <a href="manage-sales.html" class="cta-button secondary">Manage Sales</a>
     </nav>
 
-    <h1>Set Daily Stock</h1>
+    <div class="text-content set-stock">
+      <h1>Set Stock For <span id="current-date"></span></h1>
+    </div>
 
     <table id="daily-stock-table">
       <thead>

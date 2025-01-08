@@ -9,9 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   // Time Display
-  const currentDateEl = document.getElementById("current-date");
-  const today = new Date().toLocaleDateString();
-  if (currentDateEl) currentDateEl.textContent = `Date: ${today}`;
+  // const currentDateEl = document.getElementById("current-date");
+  // const today = new Date().toLocaleDateString();
+  // if (currentDateEl) currentDateEl.textContent = `for: ${today}`;
+
+
+  const currentDateSpan = document.getElementById("current-date");
+  const currentDate = new Date();
+  const options = {year: "numeric", month: "long", day: "numeric" };
+  currentDateSpan.textContent = currentDate.toLocaleDateString("en-US", options);
 
   // Retrieve daily stock from localStorage
   const getDailyStock = () => JSON.parse(localStorage.getItem("dailyStock")) || [];

@@ -8,10 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "#1200 Bread", price: 1200 },
   ];
 
-  // Time Display
-  const currentDateEl = document.getElementById("current-date");
-  const today = new Date().toLocaleDateString();
-  if (currentDateEl) currentDateEl.textContent = `Date: ${today}`;
+  // Date Display
+  const currentDateSpan = document.getElementById("current-date");
+  const currentDate = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  currentDateSpan.textContent = currentDate.toLocaleDateString("en-US", options);
 
   // Retrieve data from localStorage
   const getData = (key) => JSON.parse(localStorage.getItem(key)) || [];
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${sale.price}</td>
         <td>${sale.quantity}</td>
         <td>${totalSales}</td>
-        <td><button class="delete-sale" data-index="${index}">Delete</button></td>
+        <td><button class="delete-sale cta-button secondary" data-index="${index}">Delete</button></td>
       `;
       tableBody.appendChild(row);
     });
