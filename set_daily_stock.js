@@ -8,15 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "#1200 Bread", price: 1200 },
   ];
 
-  // Time Display
-  // const currentDateEl = document.getElementById("current-date");
-  // const today = new Date().toLocaleDateString();
-  // if (currentDateEl) currentDateEl.textContent = `for: ${today}`;
-
-
   const currentDateSpan = document.getElementById("current-date");
   const currentDate = new Date();
-  const options = {year: "numeric", month: "long", day: "numeric" };
+  const options = { year: "numeric", month: "long", day: "numeric" };
   currentDateSpan.textContent = currentDate.toLocaleDateString("en-US", options);
 
   // Retrieve daily stock from localStorage
@@ -53,6 +47,30 @@ document.addEventListener("DOMContentLoaded", () => {
       dailyStock[index] = { name: breadTypes[index].name, quantity };
       saveDailyStock(dailyStock);
     }
+  });
+
+  // Function to download the page as PDF
+  const downloadPdfButton = document.getElementById("download-pdf");
+  downloadPdfButton.addEventListener("click", () => {
+    const element = document.body; // Select the entire page
+    const options = {
+      margin: 1,
+      filename: "Bakery_Stock_Report.pdf",
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: "portrait" },
+    };
+
+    // Load html2pdf.js library and generate PDF
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js";
+    script.onload = () => {
+      html2pdf().set(options).from(element).save();
+    };
+    script.onerror = () => {
+      console.error("Failed to load html2pdf.js.");
+      alert("An error occurred while loading the PDF library. Please try again.");
+    };
+    document.body.appendChild(script);
   });
 
   // Initialize table

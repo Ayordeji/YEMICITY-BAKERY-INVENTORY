@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // DOM Elements
   const breadTypes = [
     { name: "#270 Bread", price: 270 },
     { name: "#350 Bread", price: 350 },
@@ -7,6 +8,43 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "#1000 Bread", price: 1000 },
     { name: "#1200 Bread", price: 1200 },
   ];
+
+  const salesTableBody = document.querySelector("#sales-record-table tbody");
+  const deleteAllButton = document.getElementById("delete-all");
+  const downloadPdfButton = document.getElementById("download-pdf");
+
+  // Event listener to delete all records
+  deleteAllButton.addEventListener("click", () => {
+    if (confirm("Are you sure you want to delete all sales records?")) {
+      salesTableBody.innerHTML = ""; // Clear all rows from the sales record table
+      localStorage.removeItem("salesRecords"); // Clear sales records from localStorage
+      populateSalesRecordsTable(); // Update table display
+      alert("All sales records have been deleted.");
+    }
+  });
+
+  // Function to download the page as a PDF
+  downloadPdfButton.addEventListener("click", () => {
+    const element = document.body; // Select the entire page
+    const options = {
+      margin: 1,
+      filename: "Bakery_Sales_Report.pdf",
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: "portrait" },
+    };
+
+    // Load html2pdf.js library and generate PDF
+    const script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js";
+    script.onload = () => {
+      html2pdf().set(options).from(element).save();
+    };
+    script.onerror = () => {
+      console.error("Failed to load html2pdf.js.");
+      alert("An error occurred while loading the PDF library. Please try again.");
+    };
+    document.body.appendChild(script);
+  });
 
   // Date Display
   const currentDateSpan = document.getElementById("current-date");
